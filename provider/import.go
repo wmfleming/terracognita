@@ -130,6 +130,16 @@ func Import(ctx context.Context, p Provider, hcl, tfstate writer.Writer, f *filt
 						return errors.Wrapf(err, "error while calculating the satate of resource %q", t)
 					}
 				}
+				// we construct a map[string]string to perform
+				// interpolation later. By default, the key is the ID
+				// but in some case (ex: google), it can be different (ex: self_link).
+				state := r.InstanceState()
+				if state != nil {
+					key := getKey(state)
+					value := state.Attributes[key]
+					interpolatedValue := fmt.Sprintf("${%s.%s.%s}", r.Type(), r.Name(), key)
+					interpolation[value] = interpolatedValue
+				}
 			}
 		}
 		if resourceLen > 0 {

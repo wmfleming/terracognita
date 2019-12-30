@@ -64,6 +64,11 @@ func TestImport(t *testing.T) {
 		iamUser1.EXPECT().State(sw).Return(nil)
 		iamUser2.EXPECT().State(sw).Return(nil)
 
+		instanceResoure1.EXPECT().InstanceState().Return(nil)
+		instanceResoure2.EXPECT().InstanceState().Return(nil)
+		iamUser1.EXPECT().InstanceState().Return(nil)
+		iamUser2.EXPECT().InstanceState().Return(nil)
+
 		hw.EXPECT().Sync().Return(nil)
 		sw.EXPECT().Sync().Return(nil)
 
@@ -105,6 +110,9 @@ func TestImport(t *testing.T) {
 
 		instanceResoure1.EXPECT().State(sw).Return(nil)
 		instanceResoure2.EXPECT().State(sw).Return(nil)
+
+		instanceResoure1.EXPECT().InstanceState().Return(nil)
+		instanceResoure2.EXPECT().InstanceState().Return(nil)
 
 		hw.EXPECT().Sync().Return(nil)
 		sw.EXPECT().Sync().Return(nil)
@@ -150,6 +158,9 @@ func TestImport(t *testing.T) {
 		iamUser1.EXPECT().State(sw).Return(nil)
 		iamUser2.EXPECT().State(sw).Return(nil)
 
+		iamUser1.EXPECT().InstanceState().Return(nil)
+		iamUser2.EXPECT().InstanceState().Return(nil)
+
 		hw.EXPECT().Sync().Return(nil)
 		sw.EXPECT().Sync().Return(nil)
 
@@ -184,6 +195,8 @@ func TestImport(t *testing.T) {
 
 		iamUser1.EXPECT().ImportState().Return(nil, nil)
 		iamUser2.EXPECT().ImportState().Return(nil, nil)
+
+		iamUser2.EXPECT().InstanceState().Return(nil)
 
 		iamUser1.EXPECT().Read(f).Return(errcode.ErrProviderResourceDoNotMatchTag)
 		iamUser2.EXPECT().Read(f).Return(nil)
@@ -230,6 +243,7 @@ func TestImport(t *testing.T) {
 		iamUser2.EXPECT().Read(f).Return(nil)
 
 		iamUser2.EXPECT().State(sw).Return(nil)
+		iamUser2.EXPECT().InstanceState().Return(nil)
 
 		sw.EXPECT().Sync().Return(nil)
 
@@ -268,6 +282,7 @@ func TestImport(t *testing.T) {
 		iamUser2.EXPECT().Read(f).Return(nil)
 
 		iamUser2.EXPECT().HCL(hw).Return(nil)
+		iamUser2.EXPECT().InstanceState().Return(nil)
 
 		hw.EXPECT().Sync().Return(nil)
 
@@ -309,6 +324,7 @@ func TestImport(t *testing.T) {
 		iamUser2.EXPECT().HCL(hw).Return(nil)
 
 		iamUser2.EXPECT().State(sw).Return(nil)
+		iamUser2.EXPECT().InstanceState().Return(nil)
 
 		hw.EXPECT().Sync().Return(nil)
 		sw.EXPECT().Sync().Return(nil)
@@ -351,6 +367,7 @@ func TestImport(t *testing.T) {
 		iamUser2.EXPECT().HCL(hw).Return(nil)
 
 		iamUser2.EXPECT().State(sw).Return(nil)
+		iamUser2.EXPECT().InstanceState().Return(nil)
 
 		hw.EXPECT().Sync().Return(nil)
 		sw.EXPECT().Sync().Return(nil)
