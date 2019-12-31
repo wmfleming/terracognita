@@ -48,6 +48,20 @@ func (mr *WriterMockRecorder) Has(arg0 interface{}) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Has", reflect.TypeOf((*Writer)(nil).Has), arg0)
 }
 
+// Interpolate mocks base method
+func (m *Writer) Interpolate(arg0 map[string]string) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Interpolate", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// Interpolate indicates an expected call of Interpolate
+func (mr *WriterMockRecorder) Interpolate(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Interpolate", reflect.TypeOf((*Writer)(nil).Interpolate), arg0)
+}
+
 // Sync mocks base method
 func (m *Writer) Sync() error {
 	m.ctrl.T.Helper()

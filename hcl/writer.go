@@ -123,3 +123,22 @@ func (w *Writer) Sync() error {
 	}
 	return nil
 }
+
+// Interpolate replaces the hardcoded resources link
+// with TF interpolation
+func (w *Writer) Interpolate(i map[string]string) error {
+	resources := w.Config["resource"]
+	b, err := json.Marshal(resources)
+	if err != nil {
+		return errors.Wrap(err, "unable to convert resources to JSON")
+	}
+	for key, value := range i {
+		b = bytes.ReplaceAll(b, []byte(key), []byte(value))
+	}
+	var config map[string]map[string]interface{}
+	if err := json.Unmarshal(b, &config); err != nil {
+		return errors.Wrap(err, "unable to convert JSON to resource array")
+	}
+	w.Config["resource"] = config
+	return nil
+}
